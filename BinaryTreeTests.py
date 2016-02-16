@@ -28,8 +28,8 @@ def setup_multiple_adds():
     x.add(17)
     x.add(16)
     x.add(18)
-    x.add(20)
     x.add(23)
+    x.add(20)
     return x
 
 ################################################################################
@@ -221,6 +221,7 @@ def test_delete_node_two_children_value():
 def test_delete_node_two_children_child_value():
     x = setup_multiple_adds()
     x.delete(19)
+    assert x.head_node.right_node.value is 20
     assert x.head_node.right_node.right_node.value is 23
 
 ####                            To String tests                             ####

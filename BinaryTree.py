@@ -3,12 +3,16 @@
 ###################################
 
 # Node class for BinaryTree
-class BinaryNode:
+class BinaryNode(object):
     left_node = None
     right_node = None
     parent_node = None
     value = None
 
+    @staticmethod
+    def _create_new_node():
+        return BinaryNode()
+    
     # Recursively add newValue to tree
     def add(self, newValue):
         if self.value is None:
@@ -16,12 +20,12 @@ class BinaryNode:
             return
         if newValue < self.value:
             if self.left_node is None:
-                self.left_node = BinaryNode()
+                self.left_node = self.__class__._create_new_node()
                 self.left_node.parent_node = self
             self.left_node.add(newValue)
         else:
             if self.right_node is None:
-                self.right_node = BinaryNode()
+                self.right_node = self.__class__._create_new_node()
                 self.right_node.parent_node = self
             self.right_node.add(newValue)
 
@@ -113,24 +117,28 @@ class BinaryNode:
         else:
             currDepth = depth+1
             while currDepth < maxDepth:
-                rows[currDepth] += ("x"*(pow(maxDepth-currDepth,2)-1)) + "N"
+                rows[currDepth] += ("x"*(pow(maxDepth-currDepth,2))) + "N"
                 currDepth += 1
         if self.right_node is not None:
             self.right_node.make_string(rows, depth+1, maxDepth)
         else:
             currDepth = depth+1
             while currDepth < maxDepth:
-                rows[currDepth] += ("x"*(pow(maxDepth-currDepth,2)-1)) + "N"
+                rows[currDepth] += ("x"*(pow(maxDepth-currDepth,2))) + "N"
                 currDepth += 1
         
 # Main implementation
-class BinaryTree:
+class BinaryTree(object):
     head_node = None
 
+    @staticmethod
+    def _create_new_node():
+        return BinaryNode()
+    
     # Add a new value to the tree
     def add(self, newValue):
         if self.head_node is None:
-            self.head_node = BinaryNode()
+            self.head_node = self.__class__._create_new_node()
         self.head_node.add(newValue)
 
     # Determine the depth of the tree
