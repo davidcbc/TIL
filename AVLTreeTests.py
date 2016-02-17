@@ -372,6 +372,23 @@ def test_maximum():
     assert x.head_node.find_maximum() is 23
 
 ## Invalid tests until AVL delete is implemented
+
+def test_delete_balance_calculation():
+    x = setup_multiple_adds()
+    print x.to_string()
+    x.delete(17)
+    print x.to_string()
+    print x.head_node.right_node.balance
+    assert x.head_node.right_node.balance is -2
+
+def test_delete_depth_calculation():
+    x = setup_multiple_adds()
+    print x.to_string()
+    x.delete(17)
+    print x.to_string()
+    print x.head_node.right_node.left_depth
+    assert x.head_node.right_node.left_depth is 0
+    
 ##def test_delete_head_two_children_find():
 ##    x = setup_multiple_adds()
 ##    x.delete(10)

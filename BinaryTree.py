@@ -75,7 +75,6 @@ class BinaryNode(object):
     # Return False if the value was not in the tree
     def delete(self, value):
         if self.value is value:
-            print "Found " + str(value)
             if self.left_node is None and self.right_node is None:
                 if self.parent_node is not None and self.parent_node.value >= value:
                     self.parent_node.left_node = None

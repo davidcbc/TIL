@@ -44,7 +44,22 @@ class AVLNode(BinaryNode):
             self.rotate_left()
         if self.balance is -2 and self.right_node.balance is -1:
             self.rotate_left()
-
+    def delete(self, value):
+        if super(AVLNode, self).delete(value) is True:
+            if self is None:
+                return True
+            else:
+                if value < self.value:
+                    self.balance = self.balance - 1
+                    self.left_depth = self.left_depth - 1    
+                else:
+                    self.balance = self.balance + 1
+                    self.right_depth = self.right_depth - 1
+                return True
+        else:
+            return False
+        
+        
     def rotate_right(self):
         y = self.left_node
         t3 = self.left_node.right_node
