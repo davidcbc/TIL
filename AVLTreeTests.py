@@ -337,7 +337,11 @@ def test_delete_head_right_child_find():
 
 def test_delete_head_right_child_find_child_value():
     x = setup_two_adds_right()
+    print x.to_string()
+    print x.head_node.balance
     x.delete(10)
+    print x.head_node.balance
+    print x.to_string()
     assert x.find(15) is True
 
 def test_delete_head_right_child_none():
@@ -375,31 +379,86 @@ def test_maximum():
 
 def test_delete_balance_calculation():
     x = setup_multiple_adds()
-    print x.to_string()
-    x.delete(17)
-    print x.to_string()
-    print x.head_node.right_node.balance
-    assert x.head_node.right_node.balance is -2
+##    print x.to_string()
+##    x.delete(17)
+##    print x.to_string()
+##    print x.head_node.right_node.balance
+##    assert x.head_node.right_node.balance is -2
 
 def test_delete_depth_calculation():
     x = setup_multiple_adds()
-    print x.to_string()
-    x.delete(17)
-    print x.to_string()
-    print x.head_node.right_node.left_depth
-    assert x.head_node.right_node.left_depth is 0
+##    print x.to_string()
+##    x.delete(17)
+##    print x.to_string()
+##    print x.head_node.right_node.left_depth
+##    assert x.head_node.right_node.left_depth is 0
     
-##def test_delete_head_two_children_find():
-##    x = setup_multiple_adds()
-##    x.delete(10)
-##    assert x.find(10) is False
+def test_delete_rotate_left():
+    x = AVLTree()
+    x.add(1)
+    x.add(2)
+    x.add(3)
+    x.add(4)
+    x.add(5)
+    x.add(6)
+    x.add(7)
+    x.add(8)
+    x.delete(5)
+    assert x.head_node.value is 4
+    assert x.head_node.left_node.value is 2
+    assert x.head_node.left_node.left_node.value is 1
+    assert x.head_node.left_node.right_node.value is 3
+    assert x.head_node.right_node.value is 7
+    assert x.head_node.right_node.left_node.value is 6
+    assert x.head_node.right_node.right_node.value is 8
 
-##def test_delete_head_two_children_find_child_values():
-##    x = setup_multiple_adds()
-##    x.delete(10)
-##    assert x.find(5) is True
-##    assert x.find(16) is True
-##    assert x.find(23) is True
+def test_delete_rotate_left_right():
+    x = AVLTree()
+    x.add(1)
+    x.add(2)
+    x.add(3)
+    x.add(4)
+    x.add(5)
+    x.add(6)
+    x.add(8)
+    x.add(7)
+    x.delete(5)
+
+def test_delete_rotate_right():
+    x = AVLTree()
+    x.add(8)
+    x.add(7)
+    x.add(6)
+    x.add(5)
+    x.add(4)
+    x.add(3)
+    x.add(2)
+    x.add(1)
+    x.delete(4)
+
+def test_delete_rotate_right_left():
+    x = AVLTree()
+    x.add(8)
+    x.add(7)
+    x.add(6)
+    x.add(5)
+    x.add(4)
+    x.add(3)
+    x.add(1)
+    x.add(2)
+    x.delete(4)
+    
+def test_delete_head_two_children_find():
+    x = setup_multiple_adds()
+    x.delete(10)
+    assert x.find(10) is False
+
+def test_delete_head_two_children_find_child_values():
+    x = setup_multiple_adds()
+    x.delete(10)
+    assert x.find(5) is True
+    assert x.find(16) is True
+    assert x.find(23) is True
 
 ##def test_delete_head_two_children_head_value():
 ##    x = setup_multiple_adds()
@@ -412,10 +471,10 @@ def test_delete_depth_calculation():
 ##    x.delete(10)
 ##    assert x.head_node.right_node.find(16) is False
 ##
-##def test_delete_node_two_children_find():
-##    x = setup_multiple_adds()
-##    x.delete(19)
-##    assert x.find(19) is False
+def test_delete_node_two_children_find():
+    x = setup_multiple_adds()
+    x.delete(19)
+    assert x.find(19) is False
 
 ##def test_delete_node_two_children_value():
 ##    x = setup_multiple_adds()

@@ -76,10 +76,17 @@ class BinaryNode(object):
     def delete(self, value):
         if self.value is value:
             if self.left_node is None and self.right_node is None:
-                if self.parent_node is not None and self.parent_node.value >= value:
+                print "Now I'm in here as expected: " + str(self.value)
+                
+                if self.parent_node is not None and self.parent_node.value > value:
                     self.parent_node.left_node = None
-                elif self.parent_node is not None:
+                elif self.parent_node is not None and self.parent_node.value < value:
                     self.parent_node.right_node = None
+                elif self.parent_node is not None:
+                    if self.parent_node.left_node is self:
+                        self.parent_node.left_node = None
+                    else:
+                        self.parent_node.right_node = None
                 self.value = None
                 self = None
                 return True
@@ -87,6 +94,7 @@ class BinaryNode(object):
                 self.value = self.left_node.find_maximum()
                 return self.left_node.delete(self.value)
             else:
+                print "Going in here as expected"
                 self.value = self.right_node.find_minimum()
                 return self.right_node.delete(self.value)       
         else:
@@ -110,8 +118,10 @@ class BinaryNode(object):
         return to_string
 
     def make_string(self, rows, depth, maxDepth):
+        print "Depth: " + str(depth) + " Max Depth: " + str(maxDepth)
         rows[depth] += ("x"*(pow(maxDepth-depth,2)-len(str(self.value)))) + str(self.value)
         if self.left_node is not None:
+            print "Going into left node: " + str(self.left_node.value)
             self.left_node.make_string(rows, depth+1, maxDepth)
         else:
             currDepth = depth+1
@@ -119,6 +129,7 @@ class BinaryNode(object):
                 rows[currDepth] += ("x"*(pow(maxDepth-currDepth,2))) + "N"
                 currDepth += 1
         if self.right_node is not None:
+            print "Going into right node: " + str(self.right_node.value)
             self.right_node.make_string(rows, depth+1, maxDepth)
         else:
             currDepth = depth+1
