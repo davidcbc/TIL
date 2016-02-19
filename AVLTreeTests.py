@@ -72,6 +72,21 @@ def setup_left_right_heavy_tree():
     x.add(2)
     return x
 
+def setup_complicated_delete():
+    x = AVLTree()
+    x.add(50)
+    x.add(25)
+    x.add(75)
+    x.add(15)
+    x.add(40)
+    x.add(60)
+    x.add(80)
+    x.add(35)
+    x.add(55)
+    x.add(65)
+    x.add(90)
+    x.add(62)
+    return x
 
 ################################################################################
 # AVLTree tests                                                                #
@@ -506,6 +521,36 @@ def test_delete_rotate_right_left_structure():
     assert x.head_node.value is 2
     assert x.head_node.left_node.value is 1
     assert x.head_node.right_node.value is 3
+
+## Multiple rotation delete test
+def test_multiple_rotation_delete():
+    x = setup_complicated_delete()
+    x.delete(15)
+    assert x.head_node.value is 60
+
+    assert x.head_node.left_node.value is 50
+    assert x.head_node.left_node.left_node.value is 35
+    assert x.head_node.left_node.left_node.left_node.value is 25
+    assert x.head_node.left_node.left_node.right_node.value is 40
+    assert x.head_node.left_node.left_node.left_node.left_node is None
+    assert x.head_node.left_node.left_node.right_node.right_node is None
+    assert x.head_node.left_node.right_node.value is 55
+    assert x.head_node.left_node.right_node.left_node is None
+    assert x.head_node.left_node.right_node.right_node is None
+
+    assert x.head_node.right_node.value is 75
+    assert x.head_node.right_node.left_node.value is 65
+    assert x.head_node.right_node.left_node.left_node.value is 62
+    assert x.head_node.right_node.left_node.left_node.left_node is None
+    assert x.head_node.right_node.left_node.left_node.right_node is None
+    assert x.head_node.right_node.left_node.right_node is None
+    assert x.head_node.right_node.left_node.left_node.value is 62
+    assert x.head_node.right_node.right_node.value is 80
+    assert x.head_node.right_node.right_node.left_node is None
+    assert x.head_node.right_node.right_node.right_node.value is 90
+    assert x.head_node.right_node.right_node.right_node.left_node is None
+    assert x.head_node.right_node.right_node.right_node.right_node is None
+
 
 ## Miscellaneous deletion tests
 def test_delete_left_leaf_true():
