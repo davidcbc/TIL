@@ -2,7 +2,9 @@
 # Implementation of a Binary Tree #
 ###################################
 
+
 # Node class for BinaryTree
+
 class BinaryNode(object):
     left_node = None
     right_node = None
@@ -12,22 +14,22 @@ class BinaryNode(object):
     @staticmethod
     def _create_new_node():
         return BinaryNode()
-    
+
     # Recursively add newValue to tree
-    def add(self, newValue):
+    def add(self, new_value):
         if self.value is None:
-            self.value = newValue
+            self.value = new_value
             return
-        if newValue < self.value:
+        if new_value < self.value:
             if self.left_node is None:
                 self.left_node = self.__class__._create_new_node()
                 self.left_node.parent_node = self
-            self.left_node.add(newValue)
+            self.left_node.add(new_value)
         else:
             if self.right_node is None:
                 self.right_node = self.__class__._create_new_node()
                 self.right_node.parent_node = self
-            self.right_node.add(newValue)
+            self.right_node.add(new_value)
 
     # Determine depth of tree recursively
     def depth(self):
@@ -35,15 +37,15 @@ class BinaryNode(object):
             return 0
         else:
             if self.left_node is None:
-                leftDepth = 1
+                left_depth = 1
             else:
-                leftDepth = self.left_node.depth()+1
+                left_depth = self.left_node.depth() + 1
 
             if self.right_node is None:
-                rightDepth = 1
+                right_depth = 1
             else:
-                rightDepth = self.right_node.depth()+1
-            return max(leftDepth, rightDepth)
+                right_depth = self.right_node.depth() + 1
+            return max(left_depth, right_depth)
 
     # Find value in tree recursively.
     # Return True if found and False if not found
@@ -76,7 +78,7 @@ class BinaryNode(object):
     def delete(self, value):
         if self.value is value:
             if self.left_node is None and self.right_node is None:
-                
+
                 if self.parent_node is not None and self.parent_node.value > value:
                     self.parent_node.left_node = None
                 elif self.parent_node is not None and self.parent_node.value < value:
@@ -87,14 +89,13 @@ class BinaryNode(object):
                     else:
                         self.parent_node.right_node = None
                 self.value = None
-                self = None
                 return True
             elif self.left_node is not None and self.right_node is None:
                 self.value = self.left_node.find_maximum()
                 return self.left_node.delete(self.value)
             else:
                 self.value = self.right_node.find_minimum()
-                return self.right_node.delete(self.value)       
+                return self.right_node.delete(self.value)
         else:
             if self.value is None:
                 return False
@@ -115,23 +116,24 @@ class BinaryNode(object):
             to_string += "\nRight node->" + self.right_node.to_string()
         return to_string
 
-    def make_string(self, rows, depth, maxDepth):
-        rows[depth] += ("x"*(pow(maxDepth-depth,2)-len(str(self.value)))) + str(self.value)
+    def make_string(self, rows, depth, max_depth):
+        rows[depth] += ("x" * (pow(max_depth - depth, 2) - len(str(self.value)))) + str(self.value)
         if self.left_node is not None:
-            self.left_node.make_string(rows, depth+1, maxDepth)
+            self.left_node.make_string(rows, depth + 1, max_depth)
         else:
-            currDepth = depth+1
-            while currDepth < maxDepth:
-                rows[currDepth] += ("x"*(pow(maxDepth-currDepth,2))) + "N"
-                currDepth += 1
+            current_depth = depth + 1
+            while current_depth < max_depth:
+                rows[current_depth] += ("x" * (pow(max_depth - current_depth, 2))) + "N"
+                current_depth += 1
         if self.right_node is not None:
-            self.right_node.make_string(rows, depth+1, maxDepth)
+            self.right_node.make_string(rows, depth + 1, max_depth)
         else:
-            currDepth = depth+1
-            while currDepth < maxDepth:
-                rows[currDepth] += ("x"*(pow(maxDepth-currDepth,2))) + "N"
-                currDepth += 1
-        
+            current_depth = depth + 1
+            while current_depth < max_depth:
+                rows[current_depth] += ("x" * (pow(max_depth - current_depth, 2))) + "N"
+                current_depth += 1
+
+
 # Main implementation
 class BinaryTree(object):
     head_node = None
@@ -139,12 +141,12 @@ class BinaryTree(object):
     @staticmethod
     def _create_new_node():
         return BinaryNode()
-    
+
     # Add a new value to the tree
-    def add(self, newValue):
+    def add(self, new_value):
         if self.head_node is None:
             self.head_node = self.__class__._create_new_node()
-        self.head_node.add(newValue)
+        self.head_node.add(new_value)
 
     # Determine the depth of the tree
     def depth(self):
@@ -152,6 +154,7 @@ class BinaryTree(object):
             return 0
         else:
             return self.head_node.depth()
+
     # Find a value in the tree
     # Return True if found and False if not found
     def find(self, value):
@@ -171,12 +174,11 @@ class BinaryTree(object):
     def to_string(self):
         depth = self.depth()
         rows = []
-        retVal = ""
-        for i in range(0,depth):
+        return_value = ""
+        for i in range(0, depth):
             rows.append("")
         if self.head_node is not None:
             self.head_node.make_string(rows, 0, depth)
         for i in range(0, depth):
-            retVal += rows[i] + "\n"
-        return retVal
-        
+            return_value += rows[i] + "\n"
+        return return_value

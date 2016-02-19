@@ -72,6 +72,7 @@ def setup_left_right_heavy_tree():
     x.add(2)
     return x
 
+
 def setup_complicated_delete():
     x = AVLTree()
     x.add(50)
@@ -88,10 +89,11 @@ def setup_complicated_delete():
     x.add(62)
     return x
 
+
 ################################################################################
 # AVLTree tests                                                                #
 ################################################################################
-####                            AVL Specific tests                          ####
+#                               AVL Specific tests                             #
 def test_one_add_balance_head():
     x = setup_one_add()
     assert x.head_node.balance is 0
@@ -147,7 +149,7 @@ def test_two_adds_right_left_depth_head():
     assert x.head_node.left_depth is 0
 
 
-### Rotation tests
+#   Rotation tests
 def test_node_rebalance_left_left_balance():
     x = AVLTree()
     x.head_node = AVLNode()
@@ -297,7 +299,7 @@ def test_node_rebalance_right_left_structure():
     assert x.head_node.right_node.value is 15
 
 
-####                            Empty Tree tests                            ####
+#                               Empty Tree tests                               #
 # The head_node of a new tree is None
 def test_empty_tree():
     x = AVLTree()
@@ -309,7 +311,7 @@ def test_delete_empty_tree_false():
     assert x.delete(1) is False
 
 
-####                            One value tests                             ####
+#                               One value tests                                #
 def test_one_add_head_not_none():
     x = setup_one_add()
     assert x.head_node is not None
@@ -346,7 +348,7 @@ def test_delete_single_entry_find():
     assert x.find(1) is False
 
 
-####                            Two value tests                             ####
+#                               Two value tests                                #
 def test_two_adds_left_parent():
     x = setup_two_adds_left()
     assert x.head_node.left_node.parent_node is x.head_node
@@ -379,7 +381,7 @@ def test_two_adds_right_depth():
     assert x.depth() is 2
 
 
-####                            Multiple value tests                        ####
+#                               Multiple value tests                           #
 def test_multiple_adds_find():
     x = setup_multiple_adds()
     print x.to_string()
@@ -409,10 +411,10 @@ def test_maximum():
 
 
 ####################################################
-####                Deletion tests              ####
+#                   Deletion tests                 #
 ####################################################
 
-### Delete and rotate left
+#   Delete and rotate left
 def test_delete_rotate_left_balance_calculation():
     x = setup_right_heavy_tree()
     x.delete(1)
@@ -431,6 +433,7 @@ def test_delete_rotate_left_depth_calculation():
     assert x.head_node.right_node.left_depth is 0
     assert x.head_node.right_node.right_depth is 0
 
+
 def test_delete_rotate_left_structure():
     x = setup_right_heavy_tree()
     x.delete(1)
@@ -439,7 +442,7 @@ def test_delete_rotate_left_structure():
     assert x.head_node.right_node.value is 4
 
 
-### Delete and rotate right
+#   Delete and rotate right
 def test_delete_rotate_right_balance_calculation():
     x = setup_left_heavy_tree()
     x.delete(4)
@@ -467,7 +470,7 @@ def test_delete_rotate_right_structure():
     assert x.head_node.right_node.value is 3
 
 
-### Delete and rotate right/left
+#   Delete and rotate right/left
 def test_delete_rotate_left_right_balance_calculation():
     x = setup_right_left_heavy_tree()
     x.delete(1)
@@ -495,7 +498,7 @@ def test_delete_rotate_left_right_structure():
     assert x.head_node.right_node.value is 4
 
 
-### Delete and rotate left/right
+#   Delete and rotate left/right
 def test_delete_rotate_right_left_balance_calculation():
     x = setup_left_right_heavy_tree()
     x.delete(1)
@@ -522,7 +525,8 @@ def test_delete_rotate_right_left_structure():
     assert x.head_node.left_node.value is 1
     assert x.head_node.right_node.value is 3
 
-## Multiple rotation delete test
+
+#   Multiple rotation delete test
 def test_multiple_rotation_delete():
     x = setup_complicated_delete()
     x.delete(15)
@@ -552,7 +556,7 @@ def test_multiple_rotation_delete():
     assert x.head_node.right_node.right_node.right_node.right_node is None
 
 
-## Miscellaneous deletion tests
+#   Miscellaneous deletion tests
 def test_delete_left_leaf_true():
     x = setup_two_adds_left()
     assert x.delete(1) is True
@@ -627,7 +631,7 @@ def test_delete_head_right_child_none():
     assert x.head_node.right_node is None
 
 
-####                            To String tests                             ####
+#                               To String tests                                #
 def test_print_single_node():
     x = AVLNode()
     x.value = 10
