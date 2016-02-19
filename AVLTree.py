@@ -12,8 +12,11 @@ class AVLTree(BinaryTree):
             self.head_node = self.head_node.parent_node
             self.head_node.parent_node = None
 
-        self.head_node._test_integrity()
-        print "Integrity test done!\n\n"
+    def delete(self, value):
+        returnValue = super(AVLTree, self).delete(value)
+        if self.head_node is not None and self.head_node.parent_node is not None:
+            self.head_node = self.head_node.parent_node
+        return returnValue
             
 class AVLNode(BinaryNode):
     balance = 0
@@ -33,23 +36,16 @@ class AVLNode(BinaryNode):
                 self.right_depth = max(self.right_node.left_depth, self.right_node.right_depth) + 1
         self.balance =  self.left_depth - self.right_depth
         if self.balance is 2 and self.left_node is not None and self.left_node.balance is -1:
-            print "Balance is 2, rotate left then right"
             self.left_node.rotate_left()
             self.left_node.parent = self
             self.rotate_right()
         if self.balance is 2 and self.left_node is not None and self.left_node.balance is 1:
-            print "Balance is 2, rotate right"
             self.rotate_right()
         if self.balance is -2 and self.right_node is not None and self.right_node.balance is 1:
-            print "Balance is -2, rotate right then left"
             self.right_node.rotate_right()
             self.right_node.parent = self
             self.rotate_left()
         if self.balance is -2 and self.right_node is not None and self.right_node.balance is -1:
-            print "Balance is -2, rotate left"
-            print "self.value: " + str(self.value)
-            print "self.right_node.value: " + str(self.right_node.value)
-            print "self.right_node.right_node.value: " + str(self.right_node.right_node.value)
             self.rotate_left()
 
             
@@ -89,7 +85,6 @@ class AVLNode(BinaryNode):
     def rotate_right(self):
         z = self
         y = self.left_node
-        t1 = z.right_node
         t2 = y.right_node
         z_parent = z.parent_node
         
@@ -125,7 +120,6 @@ class AVLNode(BinaryNode):
     def rotate_left(self):
         z = self
         y = self.right_node
-        t1 = z.left_node
         t2 = y.left_node
         z_parent = z.parent_node
         
