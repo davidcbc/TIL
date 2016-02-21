@@ -1,5 +1,4 @@
-from AVLTree import AVLNode, AVLTree
-
+from DataStructures.AVLTree import AVLTree, AVLNode
 
 ################################################################################
 # Setup functions for tests                                                    #

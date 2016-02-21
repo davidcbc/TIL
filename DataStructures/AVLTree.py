@@ -1,4 +1,4 @@
-from BinaryTree import BinaryTree, BinaryNode
+from DataStructures.BinaryTree import BinaryTree, BinaryNode
 
 
 class AVLTree(BinaryTree):
@@ -75,15 +75,15 @@ class AVLNode(BinaryNode):
         else:
             return False
 
-################################################################################
-# Right rotation around z
-#               z                   y
-#              / \                 / \
-#             y   t1  ----->      t3  z
-#            / \                     / \
-#           t3  t2                  t2  t1
-#
-################################################################################
+    ############################################################################
+    # Right rotation around z
+    #               z                   y
+    #              / \                 / \
+    #             y   t1  ----->      t3  z
+    #            / \                     / \
+    #           t3  t2                  t2  t1
+    #
+    ############################################################################
 
     def rotate_right(self):
         z = self
@@ -111,7 +111,7 @@ class AVLNode(BinaryNode):
         y.balance = y.right_depth - y.left_depth
         z.balance = z.left_depth - z.right_depth
 
-    ################################################################################
+    ############################################################################
     # Left rotation around z
     #               z                    y
     #              / \                  / \
@@ -119,7 +119,7 @@ class AVLNode(BinaryNode):
     #                / \              / \
     #               t2  t3           t1  t2
     #
-    ################################################################################
+    ############################################################################
     def rotate_left(self):
         z = self
         y = self.right_node

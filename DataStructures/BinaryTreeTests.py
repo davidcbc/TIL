@@ -1,4 +1,4 @@
-from BinaryTree import BinaryNode, BinaryTree
+from DataStructures.BinaryTree import BinaryNode, BinaryTree
 
 
 ################################################################################
