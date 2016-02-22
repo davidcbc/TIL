@@ -13,22 +13,26 @@ class BFSSolver:
 
     def solve(self):
         x,y = self.current_position
+        self.visited_positions.add((x,y))
         path = [self.current_position]
         while not self.maze.is_end(x,y):
-            self.visited_positions.add((x,y))
             if (x,y+1) not in self.visited_positions and self.maze.is_open(x,y+1):
+                self.visited_positions.add((x, y + 1))
                 new_path = list(path)
                 new_path.append((x, y + 1))
                 self.path_queue.append(new_path)
             if (x,y-1) not in self.visited_positions and self.maze.is_open(x,y-1):
+                self.visited_positions.add((x, y - 1))
                 new_path = list(path)
                 new_path.append((x, y - 1))
                 self.path_queue.append(new_path)
             if (x+1,y) not in self.visited_positions and self.maze.is_open(x+1,y):
+                self.visited_positions.add((x + 1, y))
                 new_path = list(path)
                 new_path.append((x + 1, y))
                 self.path_queue.append(new_path)
             if (x-1,y) not in self.visited_positions and self.maze.is_open(x-1,y):
+                self.visited_positions.add((x - 1, y))
                 new_path = list(path)
                 new_path.append((x - 1, y))
                 self.path_queue.append(new_path)
