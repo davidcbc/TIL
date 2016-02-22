@@ -74,7 +74,7 @@ class Maze:
         borderX, borderY = self.image.size
         if x < 0 or y < 0 or x >= borderX or y >= borderY:
             return False
-        return True if self.pixels[x,y] == self.OPEN_COLOR else False
+        return self.pixels[x,y] == self.OPEN_COLOR
 
     def is_end(self, x, y):
         return True if (x,y) == self.END_POSITION else False
