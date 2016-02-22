@@ -16,6 +16,7 @@ class BFSSolver:
         self.visited_positions.add((x,y))
         path = [self.current_position]
         while not self.maze.is_end(x,y):
+            self.maze.mark_checked(x,y)
             if (x,y+1) not in self.visited_positions and self.maze.is_open(x,y+1):
                 self.visited_positions.add((x, y + 1))
                 new_path = list(path)
@@ -57,6 +58,7 @@ class BFSSolver:
             prevY = solY
         if self.maze.at_end():
             logging.info("Solved in " + str(len(path)) + " moves!")
+            self.maze.print_solution()
         else:
             logging.error("Failed! End position: " + str(self.maze.END_POSITION) + " Current position: "  + str(self.maze.current_position))
 
