@@ -22,7 +22,7 @@ public class QuickSort {
             while(input[j] > pivot) {
                 j--;
             }
-            if(i <= j) {
+            if(i < j) {
                 int temp = input[i];
                 input[i] = input[j];
                 input[j] = temp;
