@@ -1,4 +1,4 @@
-package com.davidcbc;
+package com.davidcbc.sorting;
 
 import com.davidcbc.sorting.QuickSort;
 import org.junit.Assert;

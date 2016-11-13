@@ -1,4 +1,4 @@
-package com.davidcbc;
+package com.davidcbc.sorting;
 
 import com.davidcbc.sorting.MergeSort;
 import org.junit.*;
